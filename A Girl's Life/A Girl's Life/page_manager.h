@@ -27,6 +27,7 @@ public:
 	void CreateLoadPlayerPage();
 	void CreateMainHomeGamePage();
 	void CreateMainSchoolGamePage();
+	void CreateSchoolQuizPage();
 
 	void Update();
 	void Render();

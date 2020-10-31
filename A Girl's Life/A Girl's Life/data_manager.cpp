@@ -1,6 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "data_manager.h"
 #include "global.h"
+#include<sstream>
+#include<string>
 
 void DataManager::LoadPlayersData()
 {
@@ -84,7 +86,7 @@ Player DataManager::LoadPlayerData(PlayerInfo* playerInfo)
 	{
 		
 		PlayerInfo* playerInfo;
-		char name[128]; char id[128];
+		//char name[128]; char id[128];
 
 		fscanf_s(fp, "%s", player.name, 128);
 		fscanf_s(fp, "%s", player.ID, 128);
@@ -146,4 +148,81 @@ void DataManager::CreateNewPlayerData(PlayerInfo* playerInfo)
 
 		fclose(fp);
 	}
+}
+
+void DataManager::LoadQuizData(Quizs* quizs)
+{
+	FILE* fp = nullptr;
+
+	char fileName[128] = "data/school_quiz/";
+	char fileType[] = ".dat";
+	strcat(fileName, quizs->subject);
+	strcat(fileName, fileType);
+
+
+
+	fopen_s(&fp, fileName, "rt");
+
+	if (fp != nullptr)
+	{
+
+		/*char line[256];
+
+		fscanf_s(fp, "%s", line, 128);
+		char* question = strtok(line, "/");
+		char* choice1 = strtok(NULL, "/");
+		char* choice2 = strtok(NULL, "/");
+		char* answer = strtok(NULL, "/");
+
+		quiz->setQuizInfo(question, answer, choice1, choice2);*/
+
+		char lines[100][255];
+		int i = 0;
+		while (!feof(fp))
+		{
+			fgets(lines[i], sizeof(lines[i]), fp);
+			i++;
+		}
+
+		quizs->quiz = new Quiz[i];
+
+		for (int j = 0; j < i; j++)
+		{
+
+			string str(lines[j]);
+			istringstream ss(str);
+			string stringBuffer;
+			
+
+			char question[128];
+			getline(ss, stringBuffer, '/');
+			strcpy(question, stringBuffer.c_str());
+
+			char choice1[128];
+			getline(ss, stringBuffer, '/');
+			strcpy(choice1, stringBuffer.c_str());
+
+			char choice2[128];
+			getline(ss, stringBuffer, '/');
+			strcpy(choice2, stringBuffer.c_str());
+
+			char answer[128];
+			getline(ss, stringBuffer, '/');
+			strcpy(answer, stringBuffer.c_str());
+			
+			
+			quizs->quiz[i].setQuizInfo(question, answer, choice1, choice2);
+
+			/*char* question = strtok(lines[j], "/");
+			char* choice1 = strtok(NULL, "/");
+			char* choice2 = strtok(NULL, "/");
+			char* answer = strtok(NULL, "/");
+			quizs->quiz[i].setQuizInfo(question, answer, choice1, choice2);*/
+		}
+			
+
+		fclose(fp);
+	}
+
+
 }

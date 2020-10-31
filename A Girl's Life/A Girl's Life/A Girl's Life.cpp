@@ -40,15 +40,15 @@ HRESULT InitD3D(HWND hWnd)
 
 	D3DPRESENT_PARAMETERS d3dpp;
 	ZeroMemory(&d3dpp, sizeof(d3dpp));
-	/*d3dpp.Windowed = TRUE;
+	d3dpp.Windowed = TRUE;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;*/
+	d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
 
-	d3dpp.Windowed = false;
+	/*d3dpp.Windowed = false;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8;
 	d3dpp.BackBufferWidth = WINDOW_WIDTH;
-	d3dpp.BackBufferHeight = WINDOW_HEIGHT;
+	d3dpp.BackBufferHeight = WINDOW_HEIGHT;*/
 
 	if (FAILED(g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
 		D3DCREATE_SOFTWARE_VERTEXPROCESSING,

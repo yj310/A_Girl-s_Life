@@ -13,6 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\Quiz">
+      <UniqueIdentifier>{5ed027c8-23a9-4bc4-a1c9-d8beb2bf0bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\manager">
+      <UniqueIdentifier>{f9de7337-4695-46f4-bd61-188998dcfb62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\page">
+      <UniqueIdentifier>{c9715446-f2e3-4fbb-b1a8-ab8d63cf77c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object">
+      <UniqueIdentifier>{206437bd-7358-4ed5-865e-23a1a59e1a28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\page">
+      <UniqueIdentifier>{ba2b386c-910a-4bc7-a60f-b3fdd2665093}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Quiz">
+      <UniqueIdentifier>{29d146be-d0fb-4cfb-8785-0883a4af8602}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\manager">
+      <UniqueIdentifier>{af6df1ed-3268-4999-a8dd-1820d0de8e46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Object">
+      <UniqueIdentifier>{f9350855-dc44-4b16-a875-63cd5249f919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\page\school">
+      <UniqueIdentifier>{4b96552b-ca45-44be-b932-6e3b83b1ae44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\page\school">
+      <UniqueIdentifier>{40dab748-6702-4da1-8362-90a716109227}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\framework.h">
@@ -27,53 +57,62 @@
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\cheat.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\data_manager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\global.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\game_system.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\input_manager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\item.h">
+    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\A Girl%27s Life.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\load_player_page.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\page</Filter>
     </ClInclude>
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\main_game_page_ui.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\page</Filter>
     </ClInclude>
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\main_home_game_page.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\page</Filter>
     </ClInclude>
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\main_school_game_page.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\page</Filter>
     </ClInclude>
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\new_player_page.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\page</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\page.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\data_manager.h">
+      <Filter>헤더 파일\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\input_manager.h">
+      <Filter>헤더 파일\manager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\page_manager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\player.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\manager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\texture_manager.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\player.h">
+      <Filter>헤더 파일\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\page.h">
+      <Filter>헤더 파일\page</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\item.h">
+      <Filter>헤더 파일\Object</Filter>
     </ClInclude>
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\title_page.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\page</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\A Girl%27s Life.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="school_quiz_korean.h">
+      <Filter>헤더 파일\Quiz</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\school_quiz.h">
+      <Filter>헤더 파일\Quiz</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\school_quiz_page.h">
+      <Filter>헤더 파일\page\school</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,38 +122,47 @@
     <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\cheat.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\texture_manager.cpp">
+      <Filter>소스 파일\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\page_manager.cpp">
+      <Filter>소스 파일\manager</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\data_manager.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\manager</Filter>
     </ClCompile>
     <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\game_system.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\load_player_page.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\main_game_page_ui.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\main_school_game_page.cpp">
+      <Filter>소스 파일\page</Filter>
     </ClCompile>
     <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\main_home_game_page.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\page</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\main_school_game_page.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\new_player_page.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\page_manager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\player.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\texture_manager.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\load_player_page.cpp">
+      <Filter>소스 파일\page</Filter>
     </ClCompile>
     <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\title_page.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\page</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\new_player_page.cpp">
+      <Filter>소스 파일\page</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\player.cpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\main_game_page_ui.cpp">
+      <Filter>소스 파일\page</Filter>
+    </ClCompile>
+    <ClCompile Include="school_quiz_korean.cpp">
+      <Filter>소스 파일\Quiz</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\school_quiz.cpp">
+      <Filter>소스 파일\Quiz</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\school_quiz_page.cpp">
+      <Filter>소스 파일\page\school</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

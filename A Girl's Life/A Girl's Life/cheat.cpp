@@ -24,6 +24,11 @@ void Cheat::Update()
 	{
 		pageManager.CreateMainSchoolGamePage();
 	}
+	if (inputManager.prevKeyBuffer[VK_F4] == 1
+		&& inputManager.keyBuffer[VK_F4] == 0)
+	{
+		pageManager.CreateSchoolQuizPage();
+	}
 	
 }
 

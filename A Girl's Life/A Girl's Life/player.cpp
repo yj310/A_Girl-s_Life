@@ -4,8 +4,6 @@
 
 Player::Player()
 {
-
-
 	koreanScore		 = 0;
 	mathScore		 = 0;
 	englishScore	 = 0;

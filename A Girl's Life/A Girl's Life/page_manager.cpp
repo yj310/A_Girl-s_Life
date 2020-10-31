@@ -5,6 +5,7 @@
 #include "load_player_page.h"
 #include "main_home_game_page.h"
 #include "main_school_game_page.h"
+#include "school_quiz_page.h"
 
 
 void PageManager::CreateTitlePage()
@@ -51,6 +52,16 @@ void PageManager::CreateMainSchoolGamePage()
 	}
 
 	MainSchoolGamePage* newPage = new MainSchoolGamePage();
+	currentPage = newPage;
+}
+
+void PageManager::CreateSchoolQuizPage()
+{
+	if (currentPage != nullptr) {
+		delete currentPage;
+	}
+
+	SchoolQuizPage* newPage = new SchoolQuizPage();
 	currentPage = newPage;
 }
 
