@@ -37,7 +37,7 @@ SchoolQuizPage::SchoolQuizPage()
 	const char* subject = "korean";
 	quizs = new Quizs(subject);
 	dataManager.LoadQuizData(quizs);
-
+	quizCount = 0;
 
 
 	HDC hDC = GetDC(NULL);
@@ -46,7 +46,7 @@ SchoolQuizPage::SchoolQuizPage()
 
 	int fontSize = 30;
 	TCHAR g_strFont[256];
-	wcscpy_s(g_strFont, 32, L"µÕ±Ù¸ð²Ã");
+	wcscpy_s(g_strFont, 32, L"¸¼Àº °íµñ");
 
 	int nHeight = -fontSize * nLogPixelsY / 72;
 	D3DXCreateFont(g_pd3dDevice,
@@ -73,6 +73,29 @@ void SchoolQuizPage::Update()
 	LoadButtonUpdate(pt);
 	ExitButtonUpdate(pt);
 
+	if (pt.x > 500 && pt.x < 900
+		&& pt.y > 400 && pt.y < 500)
+	{
+		
+		if (inputManager.prevKeyBuffer[VK_LBUTTON] == 1
+			&& inputManager.keyBuffer[VK_LBUTTON] == 0)
+		{
+			if (quizs->quiz[quizCount].answer[0] == '1')
+				quizCount++;
+		}
+	}
+	if (pt.x > 900 && pt.x < 1300
+		&& pt.y > 400 && pt.y < 500)
+	{
+
+		if (inputManager.prevKeyBuffer[VK_LBUTTON] == 1
+			&& inputManager.keyBuffer[VK_LBUTTON] == 0)
+		{
+			if (quizs->quiz[quizCount].answer[0] == '2')
+				quizCount++;
+		}
+	}
+
 }
 
 
@@ -82,6 +105,40 @@ void SchoolQuizPage::Render()
 	NewButtonRender();
 	LoadButtonRender();
 	ExitButtonRender();
+
+	RECT rc;
+	wchar_t p[128] = L"";
+	setlocale(LC_ALL, "Korean");
+
+	rc.left = 500;
+	rc.top = 200;
+	mbstowcs(p, quizs->subject, 128);
+	font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
+		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
+
+	rc.left = 500;
+	rc.top = 300;
+	mbstowcs(p, quizs->quiz[quizCount].question, 128);
+	font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
+		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
+
+	rc.left = 500;
+	rc.top = 400;
+	mbstowcs(p, quizs->quiz[quizCount].choice1, 128);
+	font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
+		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
+
+	rc.left = 900;
+	rc.top = 400;
+	mbstowcs(p, quizs->quiz[quizCount].choice2, 128);
+	font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
+		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
+
+	/*rc.left = 500;
+	rc.top = 500;
+	mbstowcs(p, quizs->quiz[quizCount].answer, 128);
+	font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
+		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));*/
 }
 
 
@@ -100,7 +157,8 @@ void SchoolQuizPage::NewButtonUpdate(POINT pt)
 		if (inputManager.prevKeyBuffer[VK_LBUTTON] == 1
 			&& inputManager.keyBuffer[VK_LBUTTON] == 0)
 		{
-			pageManager.CreateNewPlayerPage();
+			//pageManager.CreateNewPlayerPage();
+			quizCount++;
 		}
 	}
 	else if (NewButtonState == TEX_NEW_BUTTON_BORD)
@@ -164,7 +222,7 @@ void SchoolQuizPage::BackgroundRender()
 	D3DXVECTOR3 pos;
 	D3DXVECTOR3 cen;
 
-	element = textureManager.getTexture(TEX_TITLE_PAGE_BACKGROUND);
+	element = textureManager.getTexture(7000);
 	element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
 	rc.left = 0;
@@ -234,9 +292,6 @@ void SchoolQuizPage::ExitButtonRender()
 	RECT rc;
 	D3DXVECTOR3 pos;
 	D3DXVECTOR3 cen;
-	WCHAR text[256];
-	wchar_t p[128] = L"";
-	setlocale(LC_ALL, "Korean");
 
 	element = textureManager.getTexture(ExitButtonState);
 	element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
@@ -255,36 +310,6 @@ void SchoolQuizPage::ExitButtonRender()
 
 
 
-	
-	rc.left = 500;
-	rc.top = 500;
-	mbstowcs(p, quizs->subject, 128);
-	font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
-		D3DXCOLOR(0.21f, 0.05f, 0.35f, 1.0f));
-
-	rc.left = 500;
-	rc.top = 600;
-	mbstowcs(p, quizs->quiz[0].question, 128);
-	font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
-		D3DXCOLOR(0.21f, 0.05f, 0.35f, 1.0f));
-
-	rc.left = 500;
-	rc.top = 700;
-	mbstowcs(p, quizs->quiz[0].choice1, 128);
-	font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
-		D3DXCOLOR(0.21f, 0.05f, 0.35f, 1.0f));
-
-	rc.left = 500;
-	rc.top = 800;
-	mbstowcs(p, quizs->quiz[0].choice2, 128);
-	font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
-		D3DXCOLOR(0.21f, 0.05f, 0.35f, 1.0f));
-
-	rc.left = 500;
-	rc.top = 900;
-	mbstowcs(p, quizs->quiz[0].answer, 128);
-	font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
-		D3DXCOLOR(0.21f, 0.05f, 0.35f, 1.0f));
 
 }
 

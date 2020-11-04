@@ -166,58 +166,41 @@ void DataManager::LoadQuizData(Quizs* quizs)
 	if (fp != nullptr)
 	{
 
-		/*char line[256];
-
-		fscanf_s(fp, "%s", line, 128);
-		char* question = strtok(line, "/");
-		char* choice1 = strtok(NULL, "/");
-		char* choice2 = strtok(NULL, "/");
-		char* answer = strtok(NULL, "/");
-
-		quiz->setQuizInfo(question, answer, choice1, choice2);*/
 
 		char lines[100][255];
-		int i = 0;
+		int len = 0;
 		while (!feof(fp))
 		{
-			fgets(lines[i], sizeof(lines[i]), fp);
-			i++;
+			fgets(lines[len], sizeof(lines[len]), fp);
+			len++;
 		}
 
-		quizs->quiz = new Quiz[i];
+		quizs->quiz = new Quiz[len];
 
-		for (int j = 0; j < i; j++)
+		for (int i = 0; i < len; i++)
 		{
 
-			string str(lines[j]);
-			istringstream ss(str);
-			string stringBuffer;
-			
+			char ch[4][128] = { {'\0'} };
+			for (int j = 0, k = 0, l = 0; k < 4; j++)
+			{
+				if (lines[i][j] == '/')
+				{
+					k++;
+					l = 0;
+					continue;
+				}
 
-			char question[128];
-			getline(ss, stringBuffer, '/');
-			strcpy(question, stringBuffer.c_str());
-
-			char choice1[128];
-			getline(ss, stringBuffer, '/');
-			strcpy(choice1, stringBuffer.c_str());
-
-			char choice2[128];
-			getline(ss, stringBuffer, '/');
-			strcpy(choice2, stringBuffer.c_str());
-
-			char answer[128];
-			getline(ss, stringBuffer, '/');
-			strcpy(answer, stringBuffer.c_str());
+				if (lines[i][j] == NULL || lines[i][j] == '\0' || lines[i][j] == '/n')
+				{
+					break;
+				}
+				ch[k][l] = lines[i][j];
+				l++;
+			}
 			
 			
-			quizs->quiz[i].setQuizInfo(question, answer, choice1, choice2);
+			quizs->quiz[i].setQuizInfo(ch[0], ch[3], ch[1], ch[2]);
 
-			/*char* question = strtok(lines[j], "/");
-			char* choice1 = strtok(NULL, "/");
-			char* choice2 = strtok(NULL, "/");
-			char* answer = strtok(NULL, "/");
-			quizs->quiz[i].setQuizInfo(question, answer, choice1, choice2);*/
 		}
 			
 

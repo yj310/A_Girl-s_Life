@@ -13,6 +13,7 @@ public:
 
 	Quizs* quizs;
 	ID3DXFont* font = NULL;
+	int quizCount;
 
 	int NewButtonState;
 	int LoadButtonState;

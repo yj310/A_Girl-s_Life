@@ -70,6 +70,7 @@ void InitMyStuff()
 	textureManager.LoadTexture(L"resource/image/Background/Load_Character_page.png", TEX_LOAD_PLAYER_PAGE_BACKGROUND);
 	textureManager.LoadTexture(L"resource/image/Background/Main_Home_Game_Page.png", TEX_MAIN_HOME_GAME_PAGE_BACKGROUND);
 	textureManager.LoadTexture(L"resource/image/Background/Main_School_Game_Page.png", TEX_MAIN_SCHOOL_GAME_PAGE_BACKGROUND);
+	textureManager.LoadTexture(L"resource/image/Background/QuizBackground.png", 7000);
 
 
 
