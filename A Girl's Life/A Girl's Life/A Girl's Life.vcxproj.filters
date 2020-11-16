@@ -108,11 +108,14 @@
     <ClInclude Include="school_quiz_korean.h">
       <Filter>헤더 파일\Quiz</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\school_quiz.h">
-      <Filter>헤더 파일\Quiz</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\school_quiz_page.h">
+    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\school_korean_quiz_page.h">
       <Filter>헤더 파일\page\school</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\school_science_quiz_page.h">
+      <Filter>헤더 파일\page\school</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\school_quiz_science.h">
+      <Filter>헤더 파일\Quiz</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -158,10 +161,10 @@
     <ClCompile Include="school_quiz_korean.cpp">
       <Filter>소스 파일\Quiz</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\school_quiz.cpp">
-      <Filter>소스 파일\Quiz</Filter>
+    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\school_korean_quiz_page.cpp">
+      <Filter>소스 파일\page\school</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\school_quiz_page.cpp">
+    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\school_science_quiz_page.cpp">
       <Filter>소스 파일\page\school</Filter>
     </ClCompile>
   </ItemGroup>

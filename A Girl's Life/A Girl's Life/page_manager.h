@@ -27,7 +27,8 @@ public:
 	void CreateLoadPlayerPage();
 	void CreateMainHomeGamePage();
 	void CreateMainSchoolGamePage();
-	void CreateSchoolQuizPage();
+	void CreateSchoolScienceQuizPage();
+	void CreateSchoolKoreanQuizPage();
 
 	void Update();
 	void Render();

@@ -5,7 +5,8 @@
 #include "load_player_page.h"
 #include "main_home_game_page.h"
 #include "main_school_game_page.h"
-#include "school_quiz_page.h"
+#include "school_science_quiz_page.h"
+#include "school_korean_quiz_page.h"
 
 
 void PageManager::CreateTitlePage()
@@ -55,13 +56,23 @@ void PageManager::CreateMainSchoolGamePage()
 	currentPage = newPage;
 }
 
-void PageManager::CreateSchoolQuizPage()
+void PageManager::CreateSchoolScienceQuizPage()
 {
 	if (currentPage != nullptr) {
 		delete currentPage;
 	}
 
-	SchoolQuizPage* newPage = new SchoolQuizPage();
+	SchoolScienceQuizPage* newPage = new SchoolScienceQuizPage();
+	currentPage = newPage;
+}
+
+void PageManager::CreateSchoolKoreanQuizPage()
+{
+	if (currentPage != nullptr) {
+		delete currentPage;
+	}
+
+	SchoolKoreanQuizPage* newPage = new SchoolKoreanQuizPage();
 	currentPage = newPage;
 }
 

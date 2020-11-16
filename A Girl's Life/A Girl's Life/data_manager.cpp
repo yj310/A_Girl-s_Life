@@ -150,15 +150,11 @@ void DataManager::CreateNewPlayerData(PlayerInfo* playerInfo)
 	}
 }
 
-void DataManager::LoadQuizData(Quizs* quizs)
+void DataManager::LoadKoreanQuizData(KoreanQuizs* quizs)
 {
 	FILE* fp = nullptr;
 
-	char fileName[128] = "data/school_quiz/";
-	char fileType[] = ".dat";
-	strcat(fileName, quizs->subject);
-	strcat(fileName, fileType);
-
+	char fileName[128] = "data/school_quiz/korean.dat";
 
 
 	fopen_s(&fp, fileName, "rt");
@@ -175,11 +171,13 @@ void DataManager::LoadQuizData(Quizs* quizs)
 			len++;
 		}
 
-		quizs->quiz = new Quiz[len];
+		//kQuizs->quiz = new KoreanQuiz[len];
+
 
 		for (int i = 0; i < len; i++)
 		{
 
+			KoreanQuiz* quiz = new KoreanQuiz();
 			char ch[4][128] = { {'\0'} };
 			for (int j = 0, k = 0, l = 0; k < 4; j++)
 			{
@@ -190,7 +188,7 @@ void DataManager::LoadQuizData(Quizs* quizs)
 					continue;
 				}
 
-				if (lines[i][j] == NULL || lines[i][j] == '\0' || lines[i][j] == '/n')
+				if (lines[i][j] == NULL || lines[i][j] == '\0' || lines[i][j] == '\n')
 				{
 					break;
 				}
@@ -199,13 +197,58 @@ void DataManager::LoadQuizData(Quizs* quizs)
 			}
 			
 			
-			quizs->quiz[i].setQuizInfo(ch[0], ch[3], ch[1], ch[2]);
-
+			quiz->setQuizInfo(ch[0], ch[3], ch[1], ch[2]);
+			quizs->quizs.push_back(quiz);
+			
 		}
 			
 
 		fclose(fp);
 	}
-
+	
 
 }
+
+
+
+void DataManager::LoadScienceQuizData(ScienceQuizs* quizs) 
+{
+	FILE* fp = nullptr;
+
+	char fileName[128] = "data/school_quiz/science.dat";
+
+
+	fopen_s(&fp, fileName, "rt");
+
+	if (fp != nullptr)
+	{
+
+		char lines[20][255];
+		int len = 0;
+		while (!feof(fp))
+		{
+			fgets(lines[len], sizeof(lines[len]), fp);
+			len++;
+		}
+
+		//scQuiz[0] = new ScienceQuiz[len - 1];
+
+		for (int i = 1; i < len; i++)
+		{
+			ScienceQuiz* quiz = new ScienceQuiz();
+			for (int j = 0; ; j ++)
+			{
+				quiz->qustion.push_back(lines[i][j]);
+				//scQuizs->quiz[i-1].qustion.push_back(lines[i][j]);
+				if (lines[i][j + 1] == '\n' || lines[i][j + 1] == NULL || lines[i][j + 1] == '\0') {
+					quizs->quizs.push_back(quiz);
+					break;
+				}
+
+			}
+		}
+
+		fclose(fp);
+	}
+}
+

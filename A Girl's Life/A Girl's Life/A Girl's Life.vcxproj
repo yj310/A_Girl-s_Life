@@ -171,8 +171,9 @@
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\page_manager.h" />
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\player.h" />
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\Resource.h" />
-    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\school_quiz.h" />
-    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\school_quiz_page.h" />
+    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\school_korean_quiz_page.h" />
+    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\school_quiz_science.h" />
+    <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\school_science_quiz_page.h" />
     <ClInclude Include="school_quiz_korean.h" />
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\targetver.h" />
     <ClInclude Include="..\..\A Girl%27s Life\A Girl%27s Life\texture_manager.h" />
@@ -190,8 +191,8 @@
     <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\new_player_page.cpp" />
     <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\page_manager.cpp" />
     <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\player.cpp" />
-    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\school_quiz.cpp" />
-    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\school_quiz_page.cpp" />
+    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\school_korean_quiz_page.cpp" />
+    <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\school_science_quiz_page.cpp" />
     <ClCompile Include="school_quiz_korean.cpp" />
     <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\texture_manager.cpp" />
     <ClCompile Include="..\..\A Girl%27s Life\A Girl%27s Life\title_page.cpp" />
