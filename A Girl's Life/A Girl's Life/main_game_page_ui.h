@@ -11,6 +11,10 @@ public:
 	int errandButtonState;
 	int leisureButtonState;
 	int homeworkButtonState;
+	int NameBarState;
+
+	int charecterTexture;
 
 	ID3DXFont* font = NULL;
+	ID3DXFont* font2 = NULL;
 };

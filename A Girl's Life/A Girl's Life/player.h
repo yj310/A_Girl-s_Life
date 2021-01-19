@@ -12,9 +12,11 @@ public:
 		strcpy_s<128>(this->name, player.name);
 		strcpy_s<128>(this->ID, player.ID);
 		this->days = player.days;
+		this->time = player.time;
 		this->stress = player.stress;
 		this->energy = player.energy;
 		this->money = player.money;
+		this->character = player.character;
 
 		this->koreanScore = player.koreanScore;
 		this->mathScore = player.mathScore;
@@ -32,9 +34,11 @@ public:
 	char name[128];	// 이름
 	char ID[128];	// character ID
 	int days;	// 일차
+	int time;	// 시간
 	int stress;	// 스트레스
 	int energy;	// 체력
 	int money;	// 용돈
+	int character;	// 캐릭터
 
 	vector<Item*> myItem;	// 소유한 아이템
 
@@ -51,6 +55,7 @@ public:
 
 	// adder
 	void nexyDay() { days++; }	// 다음날로 이동
+	void addTime(int time) { this->time += time; }
 	void addStress(int stress)	{ this->stress += stress; }
 	void addEnergy(int energy)	{ this->energy += energy; }
 	void addMoney(int money)	{ this->money += money; }
@@ -70,9 +75,11 @@ public:
 	void setID(const char* ID) { strcpy_s<128>(this->ID, ID); }
 
 	void setDays(int days)		{ this->days = days; }
+	void setTime(int time) { this->time = time; }
 	void setStress(int stress)	{ this->stress = stress; }
 	void setEnergy(int energy)	{ this->energy = energy; }
 	void setMoney(int money)	{ this->money = money; }
+	void setCharacter(int character) { this->character = character; }
 
 	void setKoreanScore(int score)		{ this->koreanScore = score; }
 	void setMathScore(int score)		{ this->mathScore = score; }
@@ -85,12 +92,14 @@ public:
 
 	// getter
 	int getDays()	{ return this->days; }
+	int getTime() { return this->time; }
 	char* getName() { return this->name; }
 	char* getID() { return this->ID; }
 
 	int getStress() { return this->stress; }
 	int getEnergy() { return this->energy; }
 	int getMoney()	{ return this->money; }
+	int getCharacter() { return this->character; }
 
 	int getKoreanScore()	{ return this->koreanScore; }
 	int getMathScore()		{ return this->mathScore; }

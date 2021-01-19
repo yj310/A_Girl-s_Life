@@ -8,15 +8,18 @@
 
 #define BACK_BUTTON_WIDTH 320
 #define BACK_BUTTON_HEIGHT 110
-#define BACK_BUTTON_X 1700
+#define BACK_BUTTON_X 280
 #define BACK_BUTTON_Y 1000
 #define BACK_BUTTON_HALF_WIDTH BACK_BUTTON_WIDTH / 2
 #define BACK_BUTTON_HALF_HEIGHT BACK_BUTTON_HEIGHT / 2
 
 #define SELECT_DATA_PANEL_X 200
-#define SELECT_DATA_PANEL_Y 350
+#define SELECT_DATA_PANEL_Y 200
 #define SELECT_DATA_PANEL_WIDTH 1520
-#define SELECT_DATA_PANEL_HEIGHT 500
+#define SELECT_DATA_PANEL_HEIGHT 600
+
+#define SELECT_DATA_BOX_WIDTH SELECT_DATA_PANEL_WIDTH
+#define SELECT_DATA_BOX_HEIGHT 120
 
 LoadPlayerPage::LoadPlayerPage()
 {
@@ -30,13 +33,13 @@ LoadPlayerPage::LoadPlayerPage()
 
 	int fontSize = 30;
 	TCHAR g_strFont[256];
-	wcscpy_s(g_strFont, 32, L"µÕ±Ù¸ð²Ã");
+	wcscpy_s(g_strFont, 32, L"¸¼Àº°íµñ");
 
 	int nHeight = -fontSize * nLogPixelsY / 72;
 	D3DXCreateFont(g_pd3dDevice,
 		nHeight,
 		0,
-		FW_BOLD,
+		FW_LIGHT,
 		1,
 		FALSE,
 		DEFAULT_CHARSET,
@@ -129,7 +132,7 @@ void LoadPlayerPage::ClickDataUpdate(POINT pt)
 	{
 		for (int i = 0; i < dataManager.playerInfos.size(); i++)
 		{
-			if (pt.y > SELECT_DATA_PANEL_Y + ((i + scrol) * 100) && pt.y < SELECT_DATA_PANEL_Y + ((i + scrol + 1) * 100))
+			if (pt.y > SELECT_DATA_PANEL_Y + ((i + scrol) * SELECT_DATA_BOX_HEIGHT) && pt.y < SELECT_DATA_PANEL_Y + ((i + scrol + 1) * SELECT_DATA_BOX_HEIGHT))
 			{
 				if (DataButtonState[i] == 0)
 				{
@@ -140,9 +143,11 @@ void LoadPlayerPage::ClickDataUpdate(POINT pt)
 				if (inputManager.prevKeyBuffer[VK_LBUTTON] == 1
 					&& inputManager.keyBuffer[VK_LBUTTON] == 0)
 				{
+
 					Player player = dataManager.LoadPlayerData(dataManager.playerInfos[i]);
 					gameSystem.player = new Player(player);
 					pageManager.CreateMainHomeGamePage();
+					break;
 				}
 			}
 			else if (DataButtonState[i] == 1)
@@ -188,7 +193,7 @@ void LoadPlayerPage::BackgroundRender()
 
 	// ¿ì
 	element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
-	rc.left = SELECT_DATA_PANEL_X + SELECT_DATA_PANEL_WIDTH;
+	rc.left = SELECT_DATA_PANEL_X + SELECT_DATA_PANEL_WIDTH+1;
 	rc.top = 0; rc.right = WINDOW_WIDTH; rc.bottom = WINDOW_HEIGHT;
 	pos = { SELECT_DATA_PANEL_X + SELECT_DATA_PANEL_WIDTH, 0, 0 };
 	element->sprite->Draw(element->texture, &rc, nullptr, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -226,32 +231,51 @@ void LoadPlayerPage::DatasRender()
 		// ¹öÆ°
 		element = textureManager.getTexture(TEX_CHARECTER_SELETE_BUTTON_UP);
 		element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
-		rc.top = 0;	rc.left = 0; rc.right = 1520; rc.bottom = 100;
-		pos = { 200, float(350 + (100 * i) + (scrol * 100)), 0 };
+		rc.top = 0;	rc.left = 0; rc.right = SELECT_DATA_BOX_WIDTH; rc.bottom = SELECT_DATA_BOX_HEIGHT;
+		pos = { SELECT_DATA_PANEL_X, float(SELECT_DATA_PANEL_Y + (SELECT_DATA_BOX_HEIGHT * i) + (scrol * SELECT_DATA_BOX_HEIGHT)), 0 };
 		element->sprite->Draw(element->texture, &rc, nullptr, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
 		element->sprite->End();
 
+		int charecterTexture = TEX_LOAD_DATA_CHARACTER_01;
+		switch (dataManager.playerInfos[i]->character)
+		{
+		case 1: charecterTexture = TEX_LOAD_DATA_CHARACTER_01; break;
+		case 2: charecterTexture = TEX_LOAD_DATA_CHARACTER_02; break;
+		case 3: charecterTexture = TEX_LOAD_DATA_CHARACTER_03; break;
+		case 4: charecterTexture = TEX_LOAD_DATA_CHARACTER_04; break;
+		case 5: charecterTexture = TEX_LOAD_DATA_CHARACTER_05; break;
+		case 6: charecterTexture = TEX_LOAD_DATA_CHARACTER_06; break;
+		}
+
+		element = textureManager.getTexture(charecterTexture);
+		element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
+		rc.top = 0;	rc.left = 0; rc.right = 200; rc.bottom = 120;
+		pos = { SELECT_DATA_PANEL_X, float(SELECT_DATA_PANEL_Y + (SELECT_DATA_BOX_HEIGHT * i) + (scrol * SELECT_DATA_BOX_HEIGHT)), 0 };
+		element->sprite->Draw(element->texture, &rc, nullptr, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
+		element->sprite->End();
+
+
 		// ±Û¾¾
-		rc.left = 200;
-		rc.top = 350 + 100 * i + scrol * 100;
-		rc.right = 700;
+		rc.left = SELECT_DATA_PANEL_X+300;
+		rc.top = SELECT_DATA_PANEL_Y + SELECT_DATA_BOX_HEIGHT * i + scrol * SELECT_DATA_BOX_HEIGHT + 20;
+		rc.right = 500;
 		rc.bottom = 700;
 
 		mbstowcs(p, dataManager.playerInfos[i]->name, 128);
 		font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
-			D3DXCOLOR(0.21f, 0.05f, 0.35f, 1.0f));
+			D3DXCOLOR(0.0f, 0.00f, 0.0f, 1.0f));
 
-		rc.left = 500;
+		rc.left = 1100;
 		_stprintf_s<256>(text, _T("%d ÀÏÂ÷"), dataManager.playerInfos[i]->days);
 		font->DrawText(NULL, text, -1, &rc, DT_NOCLIP,
-			D3DXCOLOR(0.21f, 0.05f, 0.35f, 1.0f));
+			D3DXCOLOR(0.0f, 0.00f, 0.0f, 1.0f));
 
 		if (DataButtonState[i] == 1)
 		{
 			element = textureManager.getTexture(TEX_CHARECTER_SELETE_BUTTON_UP);
 			element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
-			rc.top = 0;	rc.left = 0; rc.right = 1520; rc.bottom = 100;
-			pos = { 200, float(350 + (100 * i) + (scrol * 100)), 0 };
+			rc.top = 0;	rc.left = 0; rc.right = SELECT_DATA_BOX_WIDTH; rc.bottom = SELECT_DATA_BOX_HEIGHT;
+			pos = { SELECT_DATA_PANEL_X, float(SELECT_DATA_PANEL_Y + (SELECT_DATA_BOX_HEIGHT * i) + (scrol * SELECT_DATA_BOX_HEIGHT)), 0 };
 			element->sprite->Draw(element->texture, &rc, nullptr, &pos, D3DCOLOR_ARGB(100, 255, 255, 255));
 			element->sprite->End();
 		}

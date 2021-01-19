@@ -43,12 +43,12 @@ HRESULT InitD3D(HWND hWnd)
 	d3dpp.Windowed = TRUE;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
-
-	/*d3dpp.Windowed = false;
+	
+	d3dpp.Windowed = false;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8;
 	d3dpp.BackBufferWidth = WINDOW_WIDTH;
-	d3dpp.BackBufferHeight = WINDOW_HEIGHT;*/
+	d3dpp.BackBufferHeight = WINDOW_HEIGHT;
 
 	if (FAILED(g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
 		D3DCREATE_SOFTWARE_VERTEXPROCESSING,
@@ -62,7 +62,8 @@ HRESULT InitD3D(HWND hWnd)
 
 void InitMyStuff()
 {
-
+	
+	
 	/* Texture Load */
 	// Background
 	textureManager.LoadTexture(L"resource/image/Background/Title_Page.png", TEX_TITLE_PAGE_BACKGROUND);
@@ -71,9 +72,19 @@ void InitMyStuff()
 	textureManager.LoadTexture(L"resource/image/Background/Main_Home_Game_Page.png", TEX_MAIN_HOME_GAME_PAGE_BACKGROUND);
 	textureManager.LoadTexture(L"resource/image/Background/Main_School_Game_Page.png", TEX_MAIN_SCHOOL_GAME_PAGE_BACKGROUND);
 	textureManager.LoadTexture(L"resource/image/Background/QuizBackground.png", 7000);
+	textureManager.LoadTexture(L"resource/image/Background/Create_Character_Page_selece_chatacter.png", TEX_NEW_PLAYER_SELECT_CHARACTER_PAGE_BACKGROUND);
+	textureManager.LoadTexture(L"resource/image/Background/Create_Character_Page_start_game.png", TEX_NEW_PLAYER_GAME_START_PAGE_BACKGROUND);
+	textureManager.LoadTexture(L"resource/image/Background/Errand_Page.png", TEX_ERRAND_PAGE_BACKGROUND);
+	textureManager.LoadTexture(L"resource/image/Background/Player_Info_01.png", TEX_PLAYER_INFO_01_BACKGROUND);
+	textureManager.LoadTexture(L"resource/image/Background/Player_Info_02.png", TEX_PLAYER_INFO_02_BACKGROUND);
+	textureManager.LoadTexture(L"resource/image/Background/Korean_Quiz_Page.png", TEX_KOREAN_QUIZ_PAGE_BACKGROUND);
+	textureManager.LoadTexture(L"resource/image/Background/quiz_result_page.png", TEX_QUIZ_RESULT_PAGE_BACKGROUND);
+	textureManager.LoadTexture(L"resource/image/Background/History_Quiz_Page.png", TEX_HISTORY_QUIZ_PAGE_BACKGROUND);
+	textureManager.LoadTexture(L"resource/image/Background/English_Quiz_Page.png", TEX_ENGLISH_QUIZ_PAGE_BACKGROUND);
+	textureManager.LoadTexture(L"resource/image/Background/Leisurely_Page.png", TEX_LEISURELY_PAGE_BACKGROUND);
 
-
-
+	
+	
 	// UI
 	textureManager.LoadTexture(L"resource/image/UI/NEW_Button_Nomal.png", TEX_NEW_BUTTON_NOMAL);
 	textureManager.LoadTexture(L"resource/image/UI/NEW_Button_Bord.png", TEX_NEW_BUTTON_BORD);
@@ -96,15 +107,85 @@ void InitMyStuff()
 	textureManager.LoadTexture(L"resource/image/UI/leisure_button_onmouse.png", TEX_LEISURE_BUTTON_ONMOUSE);
 	textureManager.LoadTexture(L"resource/image/UI/homework_button.png", TEX_HOMEWORK_BUTTON_NOMAL);
 	textureManager.LoadTexture(L"resource/image/UI/homework_button_onmouse.png", TEX_HOMEWORK_BUTTON_ONMOUSE);
+	textureManager.LoadTexture(L"resource/image/UI/Yes_Button_Nomal.png", TEX_YES_BUTTON_NOMAL);
+	textureManager.LoadTexture(L"resource/image/UI/Yes_Button_Bord.png", TEX_YES_BUTTON_BORD);
+	textureManager.LoadTexture(L"resource/image/UI/No_Button_Nomal.png", TEX_NO_BUTTON_NOMAL);
+	textureManager.LoadTexture(L"resource/image/UI/No_Button_Bord.png", TEX_NO_BUTTON_BORD);
+	textureManager.LoadTexture(L"resource/image/UI/NEXT_Button02.png", TEX_NEXT_BUTTON2_NOMAL);
+	textureManager.LoadTexture(L"resource/image/UI/NEXT_Button02_MouseOver.png", TEX_NEXT_BUTTON2_MOUSEOVER);
+	textureManager.LoadTexture(L"resource/image/UI/PREV_Button02.png", TEX_PREV_BUTTON2_NOMAL);
+	textureManager.LoadTexture(L"resource/image/UI/PREV_Button02_MouseOver.png", TEX_PREV_BUTTON2_MOUSEOVER);
+	textureManager.LoadTexture(L"resource/image/UI/Enter_Class_Button_Nomal.png", TEX_ENTER_CLASS_BUTTON_NOMAL);
+	textureManager.LoadTexture(L"resource/image/UI/Enter_Class_Button_Bord.png", TEX_ENTER_CLASS_BUTTON_BORD);
+	textureManager.LoadTexture(L"resource/image/UI/Show_Table_Button_Nomal.png", TEX_SHOW_TABLE_BUTTON_NOMAL);
+	textureManager.LoadTexture(L"resource/image/UI/Show_Table_Button_Bord.png", TEX_SHOW_TABLE_BUTTON_BORD);
+	textureManager.LoadTexture(L"resource/image/UI/answer_nomal.png", TEX_ANSWER_BUTTON_NOMAL);
+	textureManager.LoadTexture(L"resource/image/UI/answer_MouseOver.png", TEX_ANSWER_BUTTON_MOUSEOVER);
+	textureManager.LoadTexture(L"resource/image/UI/Close_Button_Nomal.png", TEX_CLOSE_BUTTON_NOMAL);
+	textureManager.LoadTexture(L"resource/image/UI/Close_Button_MouseOver.png", TEX_CLOSE_BUTTON_MOUSEOVER);
+	textureManager.LoadTexture(L"resource/image/UI/quizTimer_empty.png", TEX_QUIZ_TIMER_EMPTY);
+	textureManager.LoadTexture(L"resource/image/UI/quizTimer_full.png", TEX_QUIZ_TIMER_FULL);
+	textureManager.LoadTexture(L"resource/image/UI/OK_Button_Nomal.png", TEX_OK_BUTTON_NOMAL);
+	textureManager.LoadTexture(L"resource/image/UI/OK_Button_Bord.png", TEX_OK_BUTTON_BORD);
 
-
+	
 	// Object
 	textureManager.LoadTexture(L"resource/image/Object/CharecterSelectButtonUp.png", TEX_CHARECTER_SELETE_BUTTON_UP);
 	textureManager.LoadTexture(L"resource/image/Object/Clock.png", TEX_CLOCK);
 	textureManager.LoadTexture(L"resource/image/Object/NameBar.png", TEX_NAME_BAR);
+	textureManager.LoadTexture(L"resource/image/Object/character_select/character_01.png", TEX_SELECT_CHARACTER_01);
+	textureManager.LoadTexture(L"resource/image/Object/character_select/character_01_mouseover.png", TEX_SELECT_CHARACTER_01_MOUSEOVER);
+	textureManager.LoadTexture(L"resource/image/Object/character_select/character_02.png", TEX_SELECT_CHARACTER_02);
+	textureManager.LoadTexture(L"resource/image/Object/character_select/character_02_mouseover.png", TEX_SELECT_CHARACTER_02_MOUSEOVER);
+	textureManager.LoadTexture(L"resource/image/Object/character_select/character_03.png", TEX_SELECT_CHARACTER_03);
+	textureManager.LoadTexture(L"resource/image/Object/character_select/character_03_mouseover.png", TEX_SELECT_CHARACTER_03_MOUSEOVER);
+	textureManager.LoadTexture(L"resource/image/Object/character_select/character_04.png", TEX_SELECT_CHARACTER_04);
+	textureManager.LoadTexture(L"resource/image/Object/character_select/character_04_mouseover.png", TEX_SELECT_CHARACTER_04_MOUSEOVER);
+	textureManager.LoadTexture(L"resource/image/Object/character_select/character_05.png", TEX_SELECT_CHARACTER_05);
+	textureManager.LoadTexture(L"resource/image/Object/character_select/character_05_mouseover.png", TEX_SELECT_CHARACTER_05_MOUSEOVER);
+	textureManager.LoadTexture(L"resource/image/Object/character_select/character_06.png", TEX_SELECT_CHARACTER_06);
+	textureManager.LoadTexture(L"resource/image/Object/character_select/character_06_mouseover.png", TEX_SELECT_CHARACTER_06_MOUSEOVER);
+	textureManager.LoadTexture(L"resource/image/Object/StateBar.png", TEX_STATE_BAR);
+	textureManager.LoadTexture(L"resource/image/Object/TimeStateBar.png", TEX_TIME_STATE_BAR);
+	textureManager.LoadTexture(L"resource/image/Object/errand/shopping.png", TEX_ERRAND_SHOPPING);
+	textureManager.LoadTexture(L"resource/image/Object/errand/shopping_mouseover.png", TEX_ERRAND_SHOPPING_MOUSEOVER);
+	textureManager.LoadTexture(L"resource/image/Object/errand/wash_dish.png", TEX_ERRAND_WASH_DISH);
+	textureManager.LoadTexture(L"resource/image/Object/errand/wash_dish_mouseover.png", TEX_ERRAND_WASH_DISH_MOUSEOVER);
+	textureManager.LoadTexture(L"resource/image/Object/requestion_box.png", TEX_REQUESTION_BOX);
+	textureManager.LoadTexture(L"resource/image/Object/NameBar_MouseOver.png", TEX_NAME_BAR_MOUSEOVER);
+	textureManager.LoadTexture(L"resource/image/Object/table.png", TEX_TABLE);
+	textureManager.LoadTexture(L"resource/image/Object/O.png", TEX_O);
+	textureManager.LoadTexture(L"resource/image/Object/X.png", TEX_X);
+	textureManager.LoadTexture(L"resource/image/Object/leisurely/walk.png", TEX_LEISURELY_WALK);
+	textureManager.LoadTexture(L"resource/image/Object/leisurely/walk_mouseOver.png", TEX_LEISURELY_WALK_MOUSEOVER);
+	textureManager.LoadTexture(L"resource/image/Object/leisurely/game.png", TEX_LEISURELY_GAME);
+	textureManager.LoadTexture(L"resource/image/Object/leisurely/game_mouseOver.png", TEX_LEISURELY_GAME_MOUSEOVER);
 
+	
+	
+	
+	
 	// Character
-	textureManager.LoadTexture(L"resource/image/Character/girl_youn.png", TEX_GIRL_YOUN);
+	textureManager.LoadTexture(L"resource/image/Character/character01.png", TEX_CHARACTER_01);
+	textureManager.LoadTexture(L"resource/image/Character/character02.png", TEX_CHARACTER_02);
+	textureManager.LoadTexture(L"resource/image/Character/character03.png", TEX_CHARACTER_03);
+	textureManager.LoadTexture(L"resource/image/Character/character04.png", TEX_CHARACTER_04);
+	textureManager.LoadTexture(L"resource/image/Character/character05.png", TEX_CHARACTER_05);
+	textureManager.LoadTexture(L"resource/image/Character/character06.png", TEX_CHARACTER_06);
+
+	textureManager.LoadTexture(L"resource/image/Object/load_data_character/character01.png", TEX_LOAD_DATA_CHARACTER_01);
+	textureManager.LoadTexture(L"resource/image/Object/load_data_character/character02.png", TEX_LOAD_DATA_CHARACTER_02);
+	textureManager.LoadTexture(L"resource/image/Object/load_data_character/character03.png", TEX_LOAD_DATA_CHARACTER_03);
+	textureManager.LoadTexture(L"resource/image/Object/load_data_character/character04.png", TEX_LOAD_DATA_CHARACTER_04);
+	textureManager.LoadTexture(L"resource/image/Object/load_data_character/character05.png", TEX_LOAD_DATA_CHARACTER_05);
+	textureManager.LoadTexture(L"resource/image/Object/load_data_character/character06.png", TEX_LOAD_DATA_CHARACTER_06);
+
+	textureManager.LoadTexture(L"resource/image/Object/player_data/character01.png", TEX_PLAYER_DATA_CHARACTER_01);
+	textureManager.LoadTexture(L"resource/image/Object/player_data/character02.png", TEX_PLAYER_DATA_CHARACTER_02);
+	textureManager.LoadTexture(L"resource/image/Object/player_data/character03.png", TEX_PLAYER_DATA_CHARACTER_03);
+	textureManager.LoadTexture(L"resource/image/Object/player_data/character04.png", TEX_PLAYER_DATA_CHARACTER_04);
+	textureManager.LoadTexture(L"resource/image/Object/player_data/character05.png", TEX_PLAYER_DATA_CHARACTER_05);
+	textureManager.LoadTexture(L"resource/image/Object/player_data/character06.png", TEX_PLAYER_DATA_CHARACTER_06);
 
 
 

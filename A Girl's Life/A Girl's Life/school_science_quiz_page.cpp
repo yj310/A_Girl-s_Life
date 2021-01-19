@@ -57,10 +57,10 @@ void SchoolScienceQuizPage::Update()
 	for (int i = 0; i < sizeof(colors) / sizeof(colors[0]); i++)
 	{
 
-		int top = 400 + (i / 3) * 100;
+		int top = 400 + (i / 4) * 100;
 		int bottom = top + 100;
-		int left = 500 + (i % 3) * 300;
-		int right = left + 300;
+		int left = 500 + (i % 4) * 200;
+		int right = left + 200;
 
 		if (pt.x > left&& pt.x < right
 			&& pt.y > top&& pt.y < bottom)
@@ -71,12 +71,12 @@ void SchoolScienceQuizPage::Update()
 			{
 				quizs->quizs[quizCount]->answer.push_back(colors[i][0]);
 				
-				if (quizs->quizs[quizCount]->answer.size() == quizs->quizs[quizCount]->qustion.size())
+				if (quizs->quizs[quizCount]->answer.size() == quizs->quizs[quizCount]->question.size())
 				{
 					int same = 1;
 					for (int i = 0; i < quizs->quizs[quizCount]->answer.size(); ++i)
 					{
-						if (quizs->quizs[quizCount]->answer[i] != quizs->quizs[quizCount]->qustion[i])
+						if (quizs->quizs[quizCount]->answer[i] != quizs->quizs[quizCount]->question[i])
 						{
 							same = 0;
 						}
@@ -90,18 +90,24 @@ void SchoolScienceQuizPage::Update()
 			}
 		}
 	}
-	if (pt.x > 400 && pt.x < 1300
-		&& pt.y > 400 && pt.y < 500)
+
+	if (pt.x > 500 && pt.x < 600
+		&& pt.y > 900&& pt.y < 1000)
 	{
 
 		if (inputManager.prevKeyBuffer[VK_LBUTTON] == 1
 			&& inputManager.keyBuffer[VK_LBUTTON] == 0)
 		{
-			//if (quizs->quiz[quizCount].answer[0] == '2')
-			//	quizCount++;
+			if (quizs->quizs[quizCount]->answer.size() > 0)
+			{
+				quizs->quizs[quizCount]->answer.pop_back();
+			}
+
+			
+
 		}
 	}
-
+	
 }
 
 
@@ -123,10 +129,10 @@ void SchoolScienceQuizPage::Render()
 		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 
 	rc.top = 200;
-	for (int i = 0; i < quizs->quizs[quizCount]->qustion.size(); i++)
+	for (int i = 0; i < quizs->quizs[quizCount]->question.size(); i++)
 	{
 		rc.left = 500 + i*100;
-		_stprintf_s<256>(text, _T("%c"), quizs->quizs[quizCount]->qustion[i]);
+		_stprintf_s<256>(text, _T("%c"), quizs->quizs[quizCount]->question[i]);
 		font->DrawText(NULL, text, -1, &rc, DT_NOCLIP,
 			D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 	}
@@ -136,8 +142,8 @@ void SchoolScienceQuizPage::Render()
 
 	for (int i = 0; i < sizeof(colors) / sizeof(colors[0]); i++)
 	{
-		rc.top = 400 + (i / 3) * 100;
-		rc.left = 500 + (i % 3) * 300;
+		rc.top = 400 + (i / 4) * 100;
+		rc.left = 500 + (i % 4) * 200;
 		mbstowcs(p, colors[i], 10);
 		font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
 			D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
@@ -153,6 +159,11 @@ void SchoolScienceQuizPage::Render()
 	}
 
 
+	rc.top = 900;
+	rc.left = 500;
+	_stprintf_s<256>(text, _T("<"));
+	font->DrawText(NULL, text, -1, &rc, DT_NOCLIP,
+		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 	/*rc.left = 500;
 	rc.top = 500;
 	mbstowcs(p, quizs->quiz[quizCount].answer, 128);

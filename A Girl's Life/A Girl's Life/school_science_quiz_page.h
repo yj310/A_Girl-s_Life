@@ -17,9 +17,6 @@ public:
 
 	char colors[8][10] = { "violet", "blue", "red", "yello", "green", "dark", "white", "pink" };
 
-	int NewButtonState;
-	int LoadButtonState;
-	int ExitButtonState;
 
 	/* Update */
 

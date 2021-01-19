@@ -2,6 +2,8 @@
 #include "global.h"
 #include <tchar.h>
 
+#pragma warning(disable:4996)
+
 #define BACK_BUTTON_WIDTH 320
 #define BACK_BUTTON_HEIGHT 110
 #define BACK_BUTTON_X 200
@@ -29,13 +31,15 @@ NewPlayerPage::NewPlayerPage()
 
 	inputState = INPUT_NAME_BOX;
 
+	cursorCount = 0;
+
 	HDC hDC = GetDC(NULL);
 	int nLogPixelsY = GetDeviceCaps(hDC, LOGPIXELSY);
 	ReleaseDC(NULL, hDC);
 
 	int fontSize = 30;
 	TCHAR g_strFont[256];
-	wcscpy_s(g_strFont, 32, L"µÕ±Ù¸ð²Ã");
+	wcscpy_s(g_strFont, 32, L"Calibri");
 
 	int nHeight = -fontSize * nLogPixelsY / 72;
 	D3DXCreateFont(g_pd3dDevice,
@@ -50,6 +54,21 @@ NewPlayerPage::NewPlayerPage()
 		DEFAULT_PITCH | FF_DONTCARE,
 		g_strFont,
 		&font);
+
+	if (gameSystem.player == nullptr)
+	{
+		int a = 0;
+		int b = 1;
+	}
+
+	if (gameSystem.player != nullptr)
+	{
+		int a = sizeof(gameSystem.player->getName()) / sizeof(char);
+		for (int i = 0; i < a; i++)
+		{
+			cname.push_back(gameSystem.player->getName()[i]);
+		}
+	}
 
 }
 
@@ -76,6 +95,9 @@ void NewPlayerPage::Update()
 		}
 	}
 
+	cursorCount++;
+	if (cursorCount > 100)
+		cursorCount = 0;
 
 	BackButtonUpdate(pt);
 	NextButtonUpdate(pt);
@@ -139,12 +161,11 @@ void NewPlayerPage::NextButtonUpdate(POINT pt)
 				rname[i] = cname[i];
 			}
 
-			PlayerInfo* playerInfo = dataManager.AddPlayer(rname);
 
-			Player player = dataManager.LoadPlayerData(playerInfo);
-			gameSystem.player = new Player(player);
+			gameSystem.player = new Player();
+			gameSystem.player->setName(rname);
 
-			pageManager.CreateMainHomeGamePage();
+			pageManager.CreateNewPlayerSelectCharacterPage();
 
 		}
 	}
@@ -185,22 +206,34 @@ void NewPlayerPage::BackgroundRender()
 void NewPlayerPage::NameRender()
 {
 	RECT rc;
-	WCHAR text[256];
 
-
-	for (int i = 0; i < cname.size(); i++)
+	wchar_t p[128] = L"";
+	char rname[128] = "";
+	int i = 0;
+	for (i = 0; i < cname.size(); i++)
 	{
-		rc.left = 530 + i * 35;
-		rc.top = 780;
-		rc.right = 750 + i * 35;
-		rc.bottom = 15;
-		_stprintf_s<256>(text, _T("%c"), cname[i]);
-		font->DrawText(NULL, text, -1, &rc, DT_NOCLIP,
-			D3DXCOLOR(0, 0, 0, 1.0f));
-
+		rname[i] = cname[i];
 	}
 
+	rc.left = 530;
+	rc.top = 600;
+	rc.right = 750;
+	rc.bottom = 15;
 
+	mbstowcs(p, rname, 128);
+	font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
+		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
+
+	if (cursorCount <= 50)
+	{
+		rname[i] = '|';
+		//rname[i] = ' ';
+
+		mbstowcs(p, rname, 128);
+		font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
+			D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
+	}
+	
 
 }
 

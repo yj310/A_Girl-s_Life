@@ -1,1 +1,0 @@
-#include "school_quiz_korean.h"

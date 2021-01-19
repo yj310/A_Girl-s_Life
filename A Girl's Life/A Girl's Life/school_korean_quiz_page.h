@@ -14,6 +14,15 @@ public:
 	KoreanQuizs* quizs;
 	ID3DXFont* font = NULL;
 	int quizCount;
+	int firstAnswerButtonState;
+	int secondAnswerButtonState;
+	int OKButtonState;
+	int timer;
+	int maxTime;
+	int O_Count;
+	int X_Count;
+	int rightAnswerCount;
+	int wrongAnswerCount;
 
 
 	void BackgroundRender();

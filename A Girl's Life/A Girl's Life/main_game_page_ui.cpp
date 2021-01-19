@@ -3,8 +3,25 @@
 #include <tchar.h>
 #pragma warning(disable:4996)
 
+#define NAME_BAR_X 0
+#define NAME_BAR_Y 0
+#define NAME_BAR_WIDTH 500
+#define NAME_BAR_HEIGHT 140
+
+#define ENERGY_BAR_X 35
+#define ENERGY_BAR_Y 200
 #define ENERGY_BAR_WIDTH 370
 #define ENERGY_BAR_HEIGHT 50
+
+#define STRESS_BAR_X 35
+#define STRESS_BAR_Y 300
+#define STRESS_BAR_WIDTH 370
+#define STRESS_BAR_HEIGHT 50
+
+#define MONEY_BAR_X 35
+#define MONEY_BAR_Y 400
+#define MONEY_BAR_WIDTH 370
+#define MONEY_BAR_HEIGHT 50
 
 #define ACTIVITY_BUTTON_WIDTH 500
 #define ACTIVITY_BUTTON_HEIGHT 150
@@ -13,12 +30,12 @@
 #define ERRAND_BUTTON_WIDTH ACTIVITY_BUTTON_WIDTH
 #define ERRAND_BUTTON_HEIGHT ACTIVITY_BUTTON_HEIGHT
 #define ERRAND_BUTTON_X ACTIVITY_BUTTON_X
-#define ERRAND_BUtTON_Y 400
+#define ERRAND_BUtTON_Y 600
 
 #define LEISURE_BUTTON_WIDTH ACTIVITY_BUTTON_WIDTH
 #define LEISURE_BUTTON_HEIGHT ACTIVITY_BUTTON_HEIGHT
 #define LEISURE_BUTTON_X ACTIVITY_BUTTON_X
-#define LEISURE_BUtTON_Y 600
+#define LEISURE_BUtTON_Y 800
 
 #define HOMEWORK_BUTTON_WIDTH ACTIVITY_BUTTON_WIDTH
 #define HOMEWORK_BUTTON_HEIGHT ACTIVITY_BUTTON_HEIGHT
@@ -30,20 +47,22 @@ MainGamePageUI::MainGamePageUI()
 	errandButtonState = TEX_ERRAND_BUTTON_NOMAL;
 	leisureButtonState = TEX_LEISURE_BUTTON_NOMAL;
 	homeworkButtonState = TEX_HOMEWORK_BUTTON_NOMAL;
+	charecterTexture = TEX_CHARACTER_01;
+	NameBarState = TEX_NAME_BAR;
 
 	HDC hDC = GetDC(NULL);
 	int nLogPixelsY = GetDeviceCaps(hDC, LOGPIXELSY);
 	ReleaseDC(NULL, hDC);
 
-	int fontSize = 30;
+	int fontSize = 25;
 	TCHAR g_strFont[256];
-	wcscpy_s(g_strFont, 32, L"굴림");
+	wcscpy_s(g_strFont, 32, L"맑은고딕");
 
 	int nHeight = -fontSize * nLogPixelsY / 72;
 	D3DXCreateFont(g_pd3dDevice,
 		nHeight,
 		0,
-		FW_BOLD,
+		FW_NORMAL,
 		1,
 		FALSE,
 		DEFAULT_CHARSET,
@@ -52,6 +71,22 @@ MainGamePageUI::MainGamePageUI()
 		DEFAULT_PITCH | FF_DONTCARE,
 		g_strFont,
 		&font);
+
+
+	fontSize = 20;
+	nHeight = -fontSize * nLogPixelsY / 72;
+	D3DXCreateFont(g_pd3dDevice,
+		nHeight,
+		0,
+		FW_NORMAL,
+		1,
+		FALSE,
+		DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS,
+		DEFAULT_QUALITY,
+		DEFAULT_PITCH | FF_DONTCARE,
+		g_strFont,
+		&font2);
 }
 
 void MainGamePageUI::Update()
@@ -73,7 +108,7 @@ void MainGamePageUI::Update()
 		if (inputManager.prevKeyBuffer[VK_LBUTTON] == 1
 			&& inputManager.keyBuffer[VK_LBUTTON] == 0)
 		{
-			//pageManager.CreateTitlePage();
+			pageManager.CreateErrandPage();
 		}
 	}
 	else if (errandButtonState == TEX_ERRAND_BUTTON_ONMOUSE)
@@ -94,7 +129,7 @@ void MainGamePageUI::Update()
 		if (inputManager.prevKeyBuffer[VK_LBUTTON] == 1
 			&& inputManager.keyBuffer[VK_LBUTTON] == 0)
 		{
-			//pageManager.CreateTitlePage();
+			pageManager.CreateLeisurelyPage();
 		}
 	}
 	else if (leisureButtonState == TEX_LEISURE_BUTTON_ONMOUSE)
@@ -124,6 +159,27 @@ void MainGamePageUI::Update()
 	}
 
 
+	// 네임바
+	if (pt.x > NAME_BAR_X&& pt.x < NAME_BAR_X + NAME_BAR_WIDTH
+		&& pt.y > NAME_BAR_Y&& pt.y < NAME_BAR_Y + NAME_BAR_HEIGHT)
+	{
+		if (NameBarState == TEX_NAME_BAR)
+		{
+			NameBarState = TEX_NAME_BAR_MOUSEOVER;
+		}
+
+
+		if (inputManager.prevKeyBuffer[VK_LBUTTON] == 1
+			&& inputManager.keyBuffer[VK_LBUTTON] == 0)
+		{
+			pageManager.CreatePlayerInfo01Page();
+		}
+	}
+	else if (NameBarState == TEX_NAME_BAR_MOUSEOVER)
+	{
+		NameBarState = TEX_NAME_BAR;
+	}
+
 }
 
 void MainGamePageUI::Render()
@@ -147,33 +203,20 @@ void MainGamePageUI::Render()
 	element->sprite->End();
 
 
-	element = textureManager.getTexture(TEX_NAME_BAR);
+	element = textureManager.getTexture(NameBarState);
 	element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
 	rc.left = 0;
 	rc.top = 0;
-	rc.right = 500;
-	rc.bottom = 140;
-	pos = { 100, 20, 0 };
+	rc.right = NAME_BAR_WIDTH;
+	rc.bottom = NAME_BAR_HEIGHT;
+	pos = { NAME_BAR_X, NAME_BAR_Y, 0 };
 	element->sprite->Draw(element->texture, &rc, nullptr, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
 	element->sprite->End();
 
 
 
-	element = textureManager.getTexture(TEX_CLOCK);
-	element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
-	rc.left = 0;
-	rc.top = 0;
-	rc.right = 200;
-	rc.bottom = 200;
-	pos = { 20, 20, 0 };
-	element->sprite->Draw(element->texture, &rc, nullptr, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
-	element->sprite->End();
-
-
-	
-
-	rc.left = 400;
-	rc.top = 40;
+	rc.left = 70;
+	rc.top = 45;
 	rc.right = 1000;
 	rc.bottom = 10;
 
@@ -181,22 +224,81 @@ void MainGamePageUI::Render()
 	font->DrawText(NULL, p, -1, &rc, DT_NOCLIP,
 		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 
-	rc.top = 100;
-	rc.left = 350;
-	_stprintf_s<256>(text, _T("%d"), gameSystem.player->getDays());
-	font->DrawText(NULL, text, -1, &rc, DT_NOCLIP,
-		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
-
-	rc.left = 450;
-	_stprintf_s<256>(text, _T("일차"));
+	rc.left = 300;
+	_stprintf_s<256>(text, _T("%d일차"), gameSystem.player->getDays());
 	font->DrawText(NULL, text, -1, &rc, DT_NOCLIP,
 		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 
 
 
 
-	
 
+
+	element = textureManager.getTexture(TEX_TIME_STATE_BAR);
+	element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
+	rc.left = 0;
+	rc.top = 0;
+	rc.right = 350;
+	rc.bottom = 110;
+	pos = { WINDOW_WIDTH/2, 145, 0 };
+	cen = { 350 / 2, 110 / 2, 0 };
+	element->sprite->Draw(element->texture, &rc, &cen, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
+	element->sprite->End();
+
+
+	rc.left = WINDOW_WIDTH / 2 - 60;
+	rc.top = 110;
+	rc.right = WINDOW_WIDTH / 2 + 60;
+	rc.bottom = 200;
+
+	switch (gameSystem.player->getDays() % 5)
+	{
+	case 1:
+		_stprintf_s<256>(text, _T("월요일"));
+		break;
+	case 2:
+		_stprintf_s<256>(text, _T("화요일"));
+		break;
+	case 3:
+		_stprintf_s<256>(text, _T("수요일"));
+		break;
+	case 4:
+		_stprintf_s<256>(text, _T("목요일"));
+		break;
+	case 0:
+		_stprintf_s<256>(text, _T("금요일"));
+		break;
+	}
+	font2->DrawText(NULL, text, -1, &rc, DT_CENTER,
+		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
+
+
+	rc.top = 150;
+	rc.bottom = 250;
+
+	_stprintf_s<256>(text, _T("%02d:00"), gameSystem.player->getTime());
+	font->DrawText(NULL, text, -1, &rc, DT_CENTER,
+		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
+
+
+
+
+
+
+
+
+
+
+
+	element = textureManager.getTexture(TEX_STATE_BAR);
+	element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
+	rc.left = 0;
+	rc.top = 0;
+	rc.right = 450;
+	rc.bottom = 370;
+	pos = { 0, 140, 0 };
+	element->sprite->Draw(element->texture, &rc, nullptr, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
+	element->sprite->End();
 
 
 	element = textureManager.getTexture(TEX_ENERGY_BAR_EMPTY);
@@ -205,15 +307,15 @@ void MainGamePageUI::Render()
 	rc.top = 0;
 	rc.right = ENERGY_BAR_WIDTH;
 	rc.bottom = ENERGY_BAR_HEIGHT;
-	pos = { 680, 20, 0 };
+	pos = { ENERGY_BAR_X, ENERGY_BAR_Y, 0 };
 	element->sprite->Draw(element->texture, &rc, nullptr, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
 	element->sprite->End();
 
 	element = textureManager.getTexture(TEX_ENERGY_BAR_FULL);
 	element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
-	rc.right = 50 + ((ENERGY_BAR_WIDTH - 50) / 100 * gameSystem.player->getEnergy());
+	rc.right = (int)(50 + ((ENERGY_BAR_WIDTH - 50) / 100.0 * gameSystem.player->getEnergy()));
 	rc.bottom = ENERGY_BAR_HEIGHT;
-	pos = { 680, 20, 0 };
+	pos = { ENERGY_BAR_X, ENERGY_BAR_Y, 0 };
 	element->sprite->Draw(element->texture, &rc, nullptr, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
 	element->sprite->End();
 
@@ -223,17 +325,17 @@ void MainGamePageUI::Render()
 	element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
 	rc.left = 0;
 	rc.top = 0;
-	rc.right = ENERGY_BAR_WIDTH;
-	rc.bottom = ENERGY_BAR_HEIGHT;
-	pos = { 1080, 20, 0 };
+	rc.right = STRESS_BAR_WIDTH;
+	rc.bottom = STRESS_BAR_HEIGHT;
+	pos = { STRESS_BAR_X, STRESS_BAR_Y, 0 };
 	element->sprite->Draw(element->texture, &rc, nullptr, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
 	element->sprite->End();
 
 	element = textureManager.getTexture(TEX_STRESS_BAR_FULL);
 	element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
-	rc.right = 50 + ((ENERGY_BAR_WIDTH - 50) / 100 * gameSystem.player->getStress());
+	rc.right = (int)(50 + ((STRESS_BAR_WIDTH - 50) / 100.0 * gameSystem.player->getStress()));
 	rc.bottom = ENERGY_BAR_HEIGHT;
-	pos = { 1080, 20, 0 };
+	pos = { STRESS_BAR_X, STRESS_BAR_Y, 0 };
 	element->sprite->Draw(element->texture, &rc, nullptr, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
 	element->sprite->End();
 
@@ -243,15 +345,38 @@ void MainGamePageUI::Render()
 	element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
 	rc.left = 0;
 	rc.top = 0;
-	rc.right = ENERGY_BAR_WIDTH;
-	rc.bottom = ENERGY_BAR_HEIGHT;
-	pos = { 1480, 20, 0 };
+	rc.right = MONEY_BAR_WIDTH;
+	rc.bottom = MONEY_BAR_HEIGHT;
+	pos = { MONEY_BAR_X, MONEY_BAR_Y, 0 };
 	element->sprite->Draw(element->texture, &rc, nullptr, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
 	element->sprite->End();
 
+	rc.left = MONEY_BAR_X;
+	rc.top = MONEY_BAR_Y+10;
+	rc.right = MONEY_BAR_X + MONEY_BAR_WIDTH-10;
+	rc.bottom = MONEY_BAR_Y + MONEY_BAR_HEIGHT;
+	_stprintf_s<256>(text, _T("%d원"), gameSystem.player->getMoney());
+	font2->DrawText(NULL, text, -1, &rc, DT_RIGHT,
+		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 
 
-	element = textureManager.getTexture(TEX_GIRL_YOUN);
+
+
+
+
+
+
+	switch(gameSystem.player->getCharacter())
+	{
+	case 1: charecterTexture = TEX_CHARACTER_01; break;
+	case 2: charecterTexture = TEX_CHARACTER_02; break;
+	case 3: charecterTexture = TEX_CHARACTER_03; break;
+	case 4: charecterTexture = TEX_CHARACTER_04; break;
+	case 5: charecterTexture = TEX_CHARACTER_05; break;
+	case 6: charecterTexture = TEX_CHARACTER_06; break;
+
+	}
+	element = textureManager.getTexture(charecterTexture);
 	element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
 	rc.left = 0;
 	rc.top = 0;
@@ -261,14 +386,6 @@ void MainGamePageUI::Render()
 	cen = { 400, 0, 0 };
 	element->sprite->Draw(element->texture, &rc, &cen, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
 	element->sprite->End();
-
-
-	rc.top = 20;
-	rc.left = 1680;
-	_stprintf_s<256>(text, _T("%d"), gameSystem.player->getMoney());
-	font->DrawText(NULL, text, -1, &rc, DT_NOCLIP,
-		D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
-
 
 
 
@@ -295,7 +412,7 @@ void MainGamePageUI::Render()
 	pos = { LEISURE_BUTTON_X, LEISURE_BUtTON_Y, 0 };
 	element->sprite->Draw(element->texture, &rc, nullptr, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
 	element->sprite->End();
-
+	/*
 	element = textureManager.getTexture(homeworkButtonState);
 	element->sprite->Begin(D3DXSPRITE_ALPHABLEND);
 	rc.left = 0;
@@ -304,6 +421,6 @@ void MainGamePageUI::Render()
 	rc.bottom = HOMEWORK_BUTTON_HEIGHT;
 	pos = { HOMEWORK_BUTTON_X, HOMEWORK_BUtTON_Y, 0 };
 	element->sprite->Draw(element->texture, &rc, nullptr, &pos, D3DCOLOR_ARGB(255, 255, 255, 255));
-	element->sprite->End();
+	element->sprite->End();*/
 
 }

@@ -34,6 +34,16 @@ void Cheat::Update()
 	{
 		pageManager.CreateSchoolKoreanQuizPage();
 	}
+	if (inputManager.prevKeyBuffer[VK_F6] == 1
+		&& inputManager.keyBuffer[VK_F6] == 0)
+	{
+		pageManager.CreateSchoolEnglishQuizPage();
+	}
+	if (inputManager.prevKeyBuffer[VK_F7] == 1
+		&& inputManager.keyBuffer[VK_F7] == 0)
+	{
+		pageManager.CreateSchoolPTQuizPage();
+	}
 	
 }
 

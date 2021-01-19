@@ -6,7 +6,7 @@ using namespace std;
 class ScienceQuiz
 {
 public:
-	vector<char> qustion;
+	vector<char> question;
 	vector<char> answer;
 
 	ScienceQuiz() {}

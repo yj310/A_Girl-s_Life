@@ -22,6 +22,7 @@ public:
 	Player player;
 
 	ID3DXFont* font = NULL;
+	int cursorCount;
 
 
 
